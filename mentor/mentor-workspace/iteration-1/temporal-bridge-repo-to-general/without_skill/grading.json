@@ -1,0 +1,47 @@
+{
+  "eval_id": 1,
+  "eval_name": "temporal-bridge-repo-to-general",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "Response includes an intake exchange (1-3 questions) BEFORE producing the lesson list.",
+      "passed": false,
+      "evidence": "Baseline went straight into curriculum proposal without asking the user clarifying questions. Only asked 'Reply go or approve' after the plan, which is approval, not intake."
+    },
+    {
+      "text": "A curriculum markdown file is saved to outputs/curriculum.md.",
+      "passed": false,
+      "evidence": "No separate outputs/curriculum.md was saved — content lives only inline in response.md. The baseline did not persist the curriculum to a structured file."
+    },
+    {
+      "text": "Curriculum has 4-6 lessons (user asked for ~5).",
+      "passed": true,
+      "evidence": "5 lessons proposed."
+    },
+    {
+      "text": "Curriculum visibly covers BOTH repo-specific Temporal usage AND general workflow-engine concepts.",
+      "passed": true,
+      "evidence": "Each lesson explicitly labeled 'Repo lens:' and 'General lens:' — strong bridging structure."
+    },
+    {
+      "text": "Curriculum or lesson 1 references at least 2 real Temporal-related file paths.",
+      "passed": true,
+      "evidence": "Many: parse_workflow.py, RUNBOOK.md, decorators/workflow.py, dynamic_worker.py, topology_registry.py, timeout_interceptor.py, semaphore/, etc."
+    },
+    {
+      "text": "Lesson 1 starts from real code in this repo and then ladders up to general Temporal concepts.",
+      "passed": true,
+      "evidence": "Section 1.2 is repo-specific (LlamaCloud parse pipeline motivation), 1.3 mental model, 1.4 cast of characters with repo file references, 1.5 general comparison."
+    },
+    {
+      "text": "Curriculum touches on Temporal's tradeoffs vs. alternatives.",
+      "passed": true,
+      "evidence": "Section 1.5 'Why we picked Temporal specifically' compares Step Functions, Cadence, Airflow, Prefect, Dagster, saga libraries, hand-rolled state machines."
+    },
+    {
+      "text": "Lesson 1 ends with an active exercise.",
+      "passed": true,
+      "evidence": "Section 1.6 Exercise: pick a parse job from staging, find workflow_id in Loki, count event types, map activity events to functions."
+    }
+  ]
+}

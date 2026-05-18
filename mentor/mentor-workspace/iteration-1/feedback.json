@@ -1,0 +1,35 @@
+{
+  "reviews": [
+    {
+      "run_id": "parse-pipeline-curriculum-with_skill",
+      "feedback": "I really like the \"Generalize \u2014 the underlying concept\". It links to a general concept, explains it, and also shows how the current implementation is different from the general concept. The **why a workflow engine and not just a queue** section is very impressive, the content is exactly what my mentor told me during my training session. The understanding is very accurate. \nAlso, the comparison among alternative tools is awesome. It broadens my vision, letting me know that the current solution is not the only solution.\nAlso, the quiz section at the end is fantastic.\nAn improvement suggestion: maybe ask me at the beginning about my prerequisite knowledge and preference to determine how deep you will go on each topic and how much jargons you use in your language",
+      "timestamp": "2026-05-18T22:07:02.894Z"
+    },
+    {
+      "run_id": "parse-pipeline-curriculum-without_skill",
+      "feedback": "i like the two short intake questions beforehand. I also like references of code and files in the repo, although too much of it can be overwhelming.\n\nThe quick intro on what each lesson is about, how they are linked and recommendation if don't have enough time is good.\n\nOverall, the explanation is not as clear and easy to follow as the other tutorial. It throws much code references and details at me without laying out the concept map first. Good learning should be progressive",
+      "timestamp": "2026-05-18T22:07:02.894Z"
+    },
+    {
+      "run_id": "temporal-bridge-repo-to-general-with_skill",
+      "feedback": "I like the approach of starting with small goal and build on top.\nI like the approach of learning through code examples.\nit's good that tutorial is versioned, but dates are unnecessary as it doesn't tell anything relevant.\nit will be better if the tutorial can include more diagrams and mind maps to illustrate the ideas.",
+      "timestamp": "2026-05-18T22:07:02.894Z"
+    },
+    {
+      "run_id": "temporal-bridge-repo-to-general-without_skill",
+      "feedback": "Too much irrelevant filler sentences, such as \"Great topic. Before I write anything I spent a few minutes...\" \nThe tutorial is too short.\nI like the approach of explaining \"What Temporal is, why we picked it, and the mental model\" first.\nI like the approach of laying out key concepts and entities first.",
+      "timestamp": "2026-05-18T22:07:02.894Z"
+    },
+    {
+      "run_id": "k8s-infra-curriculum-with_skill",
+      "feedback": "I like the part where we briefly explain the directory structure and modules. \nI don't understand the purpose of the section below \"### Lesson 1 (2026-05-18)\" in curriculum.md, seems irrelevant to me.\nToo short and basic. \nOverall not very impressive.",
+      "timestamp": "2026-05-18T22:07:02.894Z"
+    },
+    {
+      "run_id": "k8s-infra-curriculum-without_skill",
+      "feedback": "very bad tutorial. basically teaching me nothing.",
+      "timestamp": "2026-05-18T22:07:02.894Z"
+    }
+  ],
+  "status": "in_progress"
+}

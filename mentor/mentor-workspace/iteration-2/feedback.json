@@ -1,0 +1,20 @@
+{
+  "reviews": [
+    {
+      "run_id": "parse-pipeline-curriculum-with_skill",
+      "feedback": "I like the Five wedge-points, it's important to know how things can go wrong.\nI wonder if we can connect to external tools like excalidraw to generate diagrams. if not, ascii diagram should be good enough",
+      "timestamp": "2026-05-18T23:02:46.031Z"
+    },
+    {
+      "run_id": "temporal-bridge-repo-to-general-with_skill",
+      "feedback": "explanation on the distinction of Workflows vs. Activities is important. Put it upfront is a nice move. \ncalling out what's not covered and where to find them is also a good move",
+      "timestamp": "2026-05-18T23:02:46.031Z"
+    },
+    {
+      "run_id": "k8s-infra-curriculum-with_skill",
+      "feedback": "overall a better version.\nbut i like it in the previous version where you explain the structure of the directory what each part does with a simple diagram on the file system",
+      "timestamp": "2026-05-18T23:02:46.031Z"
+    }
+  ],
+  "status": "in_progress"
+}

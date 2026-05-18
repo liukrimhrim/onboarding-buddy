@@ -1,0 +1,42 @@
+{
+  "eval_id": 2,
+  "eval_name": "k8s-infra-curriculum",
+  "prompt": "I want to learn about how our Kubernetes setup works and EKS more generally. build me a curriculum starting from what's actually in infra/ and laddering up to general k8s/EKS concepts. then run the first lesson.",
+  "assertions": [
+    {
+      "id": "asked_intake_questions",
+      "text": "Response includes an intake exchange (1-3 questions) before the curriculum.",
+      "check": "Look for clarifying questions early."
+    },
+    {
+      "id": "curriculum_file_exists",
+      "text": "A curriculum markdown file is saved to outputs/curriculum.md.",
+      "check": "outputs/curriculum.md exists and is non-empty."
+    },
+    {
+      "id": "curriculum_grounded_in_infra_dir",
+      "text": "Curriculum references at least 3 real file paths under infra/ (charts/, kubernetes/, terraform/).",
+      "check": "Look for paths like infra/charts/..., infra/kubernetes/..., infra/terraform/... Verify if possible."
+    },
+    {
+      "id": "curriculum_has_3_to_7_lessons",
+      "text": "Curriculum has 3-7 lessons.",
+      "check": "Count lesson bullets."
+    },
+    {
+      "id": "lessons_cover_general_k8s_concepts",
+      "text": "Curriculum visibly covers general k8s/EKS concepts (not just our manifests). Examples: control plane, scheduling, networking model, IRSA/IAM, scaling primitives.",
+      "check": "Look for lesson titles or descriptions referencing general k8s concepts beyond our specific files."
+    },
+    {
+      "id": "lesson1_grounds_then_generalizes",
+      "text": "Lesson 1 starts from a real file or set of files in infra/ and ladders to a general concept.",
+      "check": "Sequence check: concrete-first."
+    },
+    {
+      "id": "lesson1_has_comprehension_check",
+      "text": "Lesson 1 ends with an active comprehension check.",
+      "check": "Look for an exercise at the end."
+    }
+  ]
+}

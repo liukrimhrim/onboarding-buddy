@@ -1,0 +1,47 @@
+{
+  "eval_id": 1,
+  "eval_name": "temporal-bridge-repo-to-general",
+  "prompt": "build me a learning curriculum for Temporal. I want to understand both how we use it in this repo AND how it works as a distributed workflow engine in general. aim for ~5 sessions. show me the plan first, then once I approve, start lesson 1.",
+  "assertions": [
+    {
+      "id": "asked_intake_questions",
+      "text": "Response includes an intake exchange (1-3 questions) BEFORE producing the lesson list.",
+      "check": "Look for clarifying questions early in the response."
+    },
+    {
+      "id": "curriculum_file_exists",
+      "text": "A curriculum markdown file is saved to outputs/curriculum.md.",
+      "check": "outputs/curriculum.md exists and is non-empty."
+    },
+    {
+      "id": "curriculum_has_5ish_lessons",
+      "text": "Curriculum has 4-6 lessons (user asked for ~5).",
+      "check": "Count lesson bullets."
+    },
+    {
+      "id": "curriculum_spans_repo_and_general",
+      "text": "Curriculum visibly covers BOTH repo-specific Temporal usage AND general workflow-engine concepts (not just one).",
+      "check": "Verify that at least one lesson title or description is anchored in this repo's Temporal usage AND at least one covers general Temporal/workflow-engine concepts (durability, replay, signals, idempotency)."
+    },
+    {
+      "id": "lessons_reference_real_temporal_files",
+      "text": "Curriculum or lesson 1 references at least 2 real Temporal-related file paths from this repo.",
+      "check": "Look for clickable references to backend/jobs/, temporal worker files, or workflow definitions. Verify if possible."
+    },
+    {
+      "id": "lesson1_grounds_then_generalizes",
+      "text": "Lesson 1 starts from real code in this repo and then ladders up to general Temporal concepts (the explicit bridging structure).",
+      "check": "Sequence check: concrete-first, abstract-second within lesson 1."
+    },
+    {
+      "id": "covers_alternatives_or_tradeoffs",
+      "text": "Curriculum touches on Temporal's tradeoffs vs. alternatives (Cadence, Airflow, Step Functions, plain queues, etc.) somewhere in the plan or lesson 1.",
+      "check": "Look for an explicit comparison section or lesson that addresses 'why Temporal vs X'."
+    },
+    {
+      "id": "lesson1_has_comprehension_check",
+      "text": "Lesson 1 ends with an active exercise (predict, sketch, debug-this, etc.).",
+      "check": "Look for an explicit check at the end."
+    }
+  ]
+}

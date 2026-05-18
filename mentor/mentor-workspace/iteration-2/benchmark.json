@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "skill_name": "mentor",
+    "skill_path": "/Users/jinxinliu/.claude/skills/mentor",
+    "executor_model": "claude-opus-4-7",
+    "timestamp": "2026-05-18T15:30:00Z",
+    "evals_run": [0, 1, 2],
+    "runs_per_configuration": 1,
+    "previous_iteration": "iteration-1",
+    "skill_revisions": "Intake now asks about jargon tolerance. Lesson body must lead with concept map BEFORE files. ASCII diagrams encouraged for multi-component flows. No preambles. No structural-tour lessons. Curriculum template: no dates, replaced 'Notes from sessions' with terse 'Mentor scratchpad'."
+  },
+
+  "runs": [
+    {
+      "eval_id": 0,
+      "eval_name": "parse-pipeline-curriculum",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 317.6,
+        "tokens": 88342,
+        "tool_calls": 34,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) BEFORE proposing the curriculum.", "passed": true, "evidence": "Intake recap shows goal sharpness + jargon tolerance + scope questions answered. No 'great topic' preamble."},
+        {"text": "A curriculum markdown file is saved (copied into outputs/curriculum.md).", "passed": true, "evidence": "curriculum.md exists, 28 lines, no dates."},
+        {"text": "Curriculum contains a clear single-paragraph Goal section.", "passed": true, "evidence": "Concrete: 'take a pjb-... ID from a pager alert and reason from first principles about WHERE in the pipeline it is stuck'."},
+        {"text": "Curriculum has between 3 and 7 lessons.", "passed": true, "evidence": "6 lessons."},
+        {"text": "Curriculum or lesson 1 references at least 3 real file paths from this repo.", "passed": true, "evidence": "parsing_v2.py:751, service.py:1559, llamaparseMultiActivityWorkflow.ts:467, llamaparseWorkflow.ts:67 — all line-counts verified by agent."},
+        {"text": "Lesson 1 opens with an explicit, verifiable goal statement.", "passed": true, "evidence": "'draw the box-and-arrow diagram from memory, name the FIVE places a job can wedge, and explain WHY the team split the work this way.'"},
+        {"text": "Lesson 1 grounds in specific repo files first, then generalizes.", "passed": true, "evidence": "Now leads with the CONCEPT MAP (three actors, two reliability layers) + ASCII diagram BEFORE file refs — matches the iteration-2 ordering rule. Generalizes to SEDA / stage-and-queue pipelining."},
+        {"text": "Lesson 1 ends with an active comprehension check.", "passed": true, "evidence": "Three scenarios: last event ActivityTaskScheduled vs ActivityTaskStarted vs explain-the-asymmetric-timeout. All active, all predictive."}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "temporal-bridge-repo-to-general",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 216.1,
+        "tokens": 75129,
+        "tool_calls": 30,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) BEFORE producing the lesson list.", "passed": true, "evidence": "3-axis intake. Jargon tolerance noted in scratchpad: 'first-occurrence gloss; don't over-define on second use.'"},
+        {"text": "A curriculum markdown file is saved to outputs/curriculum.md.", "passed": true, "evidence": "curriculum.md exists."},
+        {"text": "Curriculum has 4-6 lessons (user asked for ~5).", "passed": true, "evidence": "5 lessons."},
+        {"text": "Curriculum visibly covers BOTH repo-specific Temporal usage AND general workflow-engine concepts.", "passed": true, "evidence": "Each lesson 'closes with the general concept climb'. Lessons 1-4 anchor in real repo files; the bridge to general concepts is explicit."},
+        {"text": "Curriculum or lesson 1 references at least 2 real Temporal-related file paths.", "passed": true, "evidence": "extract/temporal/workflow.py, parse/temporal/direct/activity.py, plus pointers to error_handling.py, non_retryable.py, dynamic_worker.py, registry/."},
+        {"text": "Lesson 1 starts from real code in this repo and then ladders up to general Temporal concepts.", "passed": true, "evidence": "Lesson 1 explicitly structured: (a) concept map first WITH ASCII diagram → (b) ground in workflow.py + activity.py contrast → (c) climb to durable-execution / event-sourcing → (d) compare with table → (e) check. Matches the iteration-2 ordering rule cleanly."},
+        {"text": "Curriculum touches on Temporal's tradeoffs vs. alternatives.", "passed": true, "evidence": "Comparison table with RabbitMQ+status, AWS Step Functions, Airflow, Cadence. Honest answer for why this team picked Temporal."},
+        {"text": "Lesson 1 ends with an active exercise.", "passed": true, "evidence": "Predict-then-read + 'spot the bug' (uuid.uuid4() inside workflow) with three sub-questions on when/why/fix."}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "k8s-infra-curriculum",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 290.3,
+        "tokens": 60604,
+        "tool_calls": 31,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) before the curriculum.", "passed": true, "evidence": "3-axis intake. Scratchpad shows calibration: 'user has shipped to but not operated the cluster — bias toward what would I see when this breaks.'"},
+        {"text": "A curriculum markdown file is saved to outputs/curriculum.md.", "passed": true, "evidence": "curriculum.md exists."},
+        {"text": "Curriculum references at least 3 real file paths under infra/.", "passed": true, "evidence": "keda.tf, keda-scaledobject.yaml, llamacloud/templates/, terraform/environments/prod/main.tf, terraform/modules/eks/main.tf etc."},
+        {"text": "Curriculum has 3-7 lessons.", "passed": true, "evidence": "6 lessons."},
+        {"text": "Curriculum covers general k8s/EKS concepts.", "passed": true, "evidence": "Control plane vs data plane, IRSA / workload identity, cluster autoscaling tradeoffs (Karpenter vs CA vs MNG), HPA vs KEDA push/pull metrics, GitOps."},
+        {"text": "Lesson 1 starts from a real file or set of files in infra/ and ladders to a general concept.", "passed": true, "evidence": "Lesson 1 is NO LONGER a directory tour. Now opens with the provisioning-vs-workload concept + ASCII diagram, then shows ONE file from each side (keda.tf vs keda-scaledobject.yaml) as a contrast pair, then generalizes to the two-tier infra pattern. Directly addresses the iteration-1 'too short and basic' feedback."},
+        {"text": "Lesson 1 ends with an active comprehension check.", "passed": true, "evidence": "Three-part check: sorting test (6 items, classify each side of the seam), failure-mode test ('I deleted keda.tf...'), seam-finding test (open the dir, list operator installs). All active, scenario-based, not trivia."}
+      ]
+    }
+  ],
+
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.000, "stddev": 0.000, "min": 1.00, "max": 1.00},
+      "time_seconds": {"mean": 274.7, "stddev": 53.6, "min": 216.1, "max": 317.6},
+      "tokens": {"mean": 74692, "stddev": 13895, "min": 60604, "max": 88342}
+    },
+    "delta_vs_iteration_1": {
+      "pass_rate": "+0.000 (already 100% in iter-1; differentiation is qualitative)",
+      "time_seconds": "-52.5 (slightly faster — leaner outputs, less filler)",
+      "tokens": "-5930 (slightly fewer tokens; tighter prose)"
+    }
+  },
+
+  "notes": [
+    "Assertion pass rate is unchanged at 100% — the iteration-1 rubric was already saturated. The real iteration-2 signal is qualitative: do the lessons feel less basic, do diagrams help, did 'no dates' and 'no journaling' clean up the curriculum file?",
+    "Concrete improvements observed in iter-2 outputs: (a) ALL three lessons now open with a concept map paragraph + ASCII diagram BEFORE dropping into file references — the inversion the user explicitly asked for. (b) Curriculum files have zero datestamps; the 'Mentor scratchpad' section is terse and calibration-focused, not session-journal. (c) The k8s lesson 1 — the one the user called 'too short and basic' — has been completely reframed: it now lands the provisioning-vs-workload seam concept with a contrast pair (keda.tf vs keda-scaledobject.yaml) and ends on a three-scenario check including 'I deleted keda.tf, why is helm upgrade failing?'. No longer a directory tour.",
+    "Slightly faster + slightly fewer tokens than iter-1, suggesting the 'no preamble' guidance is reducing throat-clearing without hurting depth. The temporal run especially: 216s vs 332s in iter-1.",
+    "What the v1->v2 viewer comparison will show: same prompts, two versions of each output side by side. Differences are stylistic (ordering, diagrams, scratchpad cleanup), not structural — both versions ask intake, save curriculum, run lesson 1, comprehension check. The bet is the iteration-2 ordering reads better to the user than iteration-1."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "eval_id": 1,
+  "eval_name": "temporal-bridge-repo-to-general",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "Response includes an intake exchange (1-3 questions) BEFORE producing the lesson list.",
+      "passed": true,
+      "evidence": "Agent summary: 'Intake done with two questions; simulated user answered debug+concept, casual Temporal use.'"
+    },
+    {
+      "text": "A curriculum markdown file is saved to outputs/curriculum.md.",
+      "passed": true,
+      "evidence": "outputs/curriculum.md exists with structured curriculum."
+    },
+    {
+      "text": "Curriculum has 4-6 lessons (user asked for ~5).",
+      "passed": true,
+      "evidence": "5 lessons in curriculum.md."
+    },
+    {
+      "text": "Curriculum visibly covers BOTH repo-specific Temporal usage AND general workflow-engine concepts.",
+      "passed": true,
+      "evidence": "Lessons 1 and 5 are repo-anchored (ParseJobWorkflow, topology_registrations.py). Lessons 2, 3, 4 cover general concepts (event history, determinism, retries/timeouts/heartbeats) — each lesson title explicitly includes a 'Concept:' subordinate."
+    },
+    {
+      "text": "Curriculum or lesson 1 references at least 2 real Temporal-related file paths from this repo.",
+      "passed": true,
+      "evidence": "settings.py, multiActivitySettings.py, topology_registrations.py:167-194, llamaparseWorkflow.ts, llamaParseActivity.ts, RUNBOOK.md, dynamic_worker.py."
+    },
+    {
+      "text": "Lesson 1 starts from real code in this repo and then ladders up to general Temporal concepts.",
+      "passed": true,
+      "evidence": "Lesson 1 has explicit (a) Set the scene → (b) Ground in the repo (5 file walkthroughs) → (c) Climb to the concept → (d) Comparison. Concrete-then-abstract ordering preserved."
+    },
+    {
+      "text": "Curriculum touches on Temporal's tradeoffs vs. alternatives.",
+      "passed": true,
+      "evidence": "Lesson 5 title: 'Comparison: vs. raw RabbitMQ, Step Functions, Celery'. Lesson 1 also includes a 'why not just RabbitMQ?' comparison section."
+    },
+    {
+      "text": "Lesson 1 ends with an active exercise.",
+      "passed": true,
+      "evidence": "Two predict-before-reading exercises (TS worker dead scenario; counting events for one activity call with retries)."
+    }
+  ]
+}

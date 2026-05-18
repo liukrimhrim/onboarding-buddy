@@ -1,0 +1,47 @@
+{
+  "eval_id": 0,
+  "eval_name": "parse-pipeline-curriculum",
+  "prompt": "tutor me on how the parse pipeline works in this repo, end to end. I want to actually understand it deeply (deep enough to debug a stuck job in prod), not just memorize file names. let's start by agreeing on a learning plan, then run lesson 1.",
+  "assertions": [
+    {
+      "id": "asked_intake_questions",
+      "text": "Response includes an intake exchange (1-3 questions about goal/prior knowledge/scope) BEFORE proposing the curriculum.",
+      "check": "Look for explicit clarifying questions early in the response, asked before the lesson list is produced."
+    },
+    {
+      "id": "curriculum_file_exists",
+      "text": "A curriculum markdown file is saved (copied into outputs/curriculum.md).",
+      "check": "outputs/curriculum.md exists and is non-empty."
+    },
+    {
+      "id": "curriculum_has_goal_section",
+      "text": "Curriculum contains a clear single-paragraph Goal section.",
+      "check": "Look for a '## Goal' heading or equivalent with a concrete success criterion (not just 'understand the pipeline')."
+    },
+    {
+      "id": "curriculum_has_3_to_7_lessons",
+      "text": "Curriculum has between 3 and 7 lessons (the sweet spot the skill prescribes).",
+      "check": "Count top-level lesson bullets in the Lessons section."
+    },
+    {
+      "id": "lessons_reference_real_files",
+      "text": "Curriculum or lesson 1 references at least 3 real file paths from this repo (backend/, llamaparse/, jobs/, etc.).",
+      "check": "Look for clickable markdown links to files like backend/app/..., llamaparse/..., or backend/jobs/... Verify the referenced files exist if possible."
+    },
+    {
+      "id": "lesson1_has_goal",
+      "text": "Lesson 1 opens with an explicit, verifiable goal statement (one sentence).",
+      "check": "Look for 'by the end of this lesson' or equivalent at the start of lesson 1."
+    },
+    {
+      "id": "lesson1_grounds_then_generalizes",
+      "text": "Lesson 1 grounds in specific repo files first, then generalizes to the underlying concept (concrete → concept order).",
+      "check": "Verify the structural sequence: real-file references appear before the conceptual explanation, not after."
+    },
+    {
+      "id": "lesson1_has_comprehension_check",
+      "text": "Lesson 1 ends with an active comprehension check (predict-then-verify, sketch, debug-this scenario, find-an-example).",
+      "check": "Look for an explicit exercise at the end — not a trivia quiz."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "skill_name": "mentor",
+  "evals": [
+    {
+      "id": 0,
+      "name": "parse-pipeline-curriculum",
+      "prompt": "tutor me on how the parse pipeline works in this repo, end to end. I want to actually understand it deeply (deep enough to debug a stuck job in prod), not just memorize file names. let's start by agreeing on a learning plan, then run lesson 1.",
+      "expected_output": "An intake exchange (1-3 questions), a curriculum saved to ~/.claude/mentor-curricula/ as a markdown file with 3-7 lessons, and the first lesson executed with grounding in actual files from backend/ or llamaparse/.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "temporal-bridge-repo-to-general",
+      "prompt": "build me a learning curriculum for Temporal. I want to understand both how we use it in this repo AND how it works as a distributed workflow engine in general. aim for ~5 sessions. show me the plan first, then once I approve, start lesson 1.",
+      "expected_output": "Curriculum file at ~/.claude/mentor-curricula/ with ~5 lessons that span both 'how we use it here' (grounded in actual jobs/ or workflow code from the repo) and general workflow-engine concepts (durability, idempotency, signals, alternatives like Cadence/Airflow/Step Functions). Lesson 1 should ground in a real file before generalizing.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "k8s-infra-curriculum",
+      "prompt": "I want to learn about how our Kubernetes setup works and EKS more generally. build me a curriculum starting from what's actually in infra/ and laddering up to general k8s/EKS concepts. then run the first lesson.",
+      "expected_output": "Curriculum grounded in infra/kubernetes/ and/or infra/charts/ and/or infra/terraform/ — must reference actual files. Lessons should bridge from concrete (our manifests/helm charts/terraform) to general (k8s control plane, EKS-specific concerns, scaling, networking). Saved to ~/.claude/mentor-curricula/.",
+      "files": []
+    }
+  ]
+}

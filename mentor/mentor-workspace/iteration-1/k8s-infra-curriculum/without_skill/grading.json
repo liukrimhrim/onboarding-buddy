@@ -1,0 +1,42 @@
+{
+  "eval_id": 2,
+  "eval_name": "k8s-infra-curriculum",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "Response includes an intake exchange (1-3 questions) before the curriculum.",
+      "passed": true,
+      "evidence": "Q1 (goal — debug vs modify vs conceptual fluency) and Q2 (starting point — multi-select) before the curriculum proposal."
+    },
+    {
+      "text": "A curriculum markdown file is saved to outputs/curriculum.md.",
+      "passed": false,
+      "evidence": "No outputs/curriculum.md exists. Content was returned inline only; baseline waited for user confirmation before running anything else."
+    },
+    {
+      "text": "Curriculum references at least 3 real file paths under infra/.",
+      "passed": true,
+      "evidence": "infra/terraform/modules/eks/{alb,traefik,dns,karpenter,keda,prometheus}.tf, infra/charts/llamacloud/templates/ingress.yaml, infra/kubernetes/k8sctl, etc."
+    },
+    {
+      "text": "Curriculum has 3-7 lessons.",
+      "passed": true,
+      "evidence": "7 lessons proposed."
+    },
+    {
+      "text": "Curriculum covers general k8s/EKS concepts (not just our manifests).",
+      "passed": true,
+      "evidence": "Explicit concepts: 'K8s networking layers (Service, Ingress, LB)', 'managed control plane vs self-managed, IRSA vs Pod Identity', 'NodePool/EC2NodeClass, bin-packing, consolidation', 'HPA metric loop, KEDA scalers, scale-to-zero', 'GitOps, pull vs push deploy, observability triangle'."
+    },
+    {
+      "text": "Lesson 1 starts from a real file or set of files in infra/ and ladders to a general concept.",
+      "passed": false,
+      "evidence": "Baseline stopped at the plan with 'Tell me your Q1/Q2 answers and I'll write the file and start.' Lesson 1 was never executed."
+    },
+    {
+      "text": "Lesson 1 ends with an active comprehension check.",
+      "passed": false,
+      "evidence": "Lesson 1 was not run; no comprehension check exists."
+    }
+  ]
+}

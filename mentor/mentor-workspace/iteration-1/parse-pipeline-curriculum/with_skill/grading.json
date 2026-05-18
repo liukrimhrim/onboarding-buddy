@@ -1,0 +1,47 @@
+{
+  "eval_id": 0,
+  "eval_name": "parse-pipeline-curriculum",
+  "configuration": "with_skill",
+  "expectations": [
+    {
+      "text": "Response includes an intake exchange (1-3 questions about goal/prior knowledge/scope) BEFORE proposing the curriculum.",
+      "passed": true,
+      "evidence": "Agent summary explicitly: 'Intake simulation: Asked about (1) what \"debug a stuck job\" concretely means, (2) prior exposure, (3) scope and whether to include the Node worker.'"
+    },
+    {
+      "text": "A curriculum markdown file is saved (copied into outputs/curriculum.md).",
+      "passed": true,
+      "evidence": "outputs/curriculum.md exists with full curriculum structure."
+    },
+    {
+      "text": "Curriculum contains a clear single-paragraph Goal section.",
+      "passed": true,
+      "evidence": "curriculum.md lines 7-13: concrete goal — 'given a stuck pjb-... job, the user can locate the stuck stage and propose a remediation without external help.'"
+    },
+    {
+      "text": "Curriculum has between 3 and 7 lessons.",
+      "passed": true,
+      "evidence": "5 lessons listed in curriculum.md."
+    },
+    {
+      "text": "Curriculum or lesson 1 references at least 3 real file paths from this repo.",
+      "passed": true,
+      "evidence": "Multiple verified file links: parsing.py:458, parsing.py:1173, parsing.py:1443, workflow.py:152, workflow.py:510, workflow.py:446, workflow.py:81, save_job_results.py, finalize_job_status.py, llamaparseWorkflow.ts, llamaparseMultiActivityWorkflow.ts."
+    },
+    {
+      "text": "Lesson 1 opens with an explicit, verifiable goal statement.",
+      "passed": true,
+      "evidence": "lesson1.md line 11-15: 'By the end of this lesson, you can draw the lifecycle of a parse job on a whiteboard and name, for each stage, the process that owns it and the artifact that proves it ran.'"
+    },
+    {
+      "text": "Lesson 1 grounds in specific repo files first, then generalizes (concrete → concept order).",
+      "passed": true,
+      "evidence": "Structural sections: (a) Goal → (b) Ground in this repo (with 5 stages, each linked to verified file paths) → (c) Generalize → (d) Compare. Concrete-first ordering held."
+    },
+    {
+      "text": "Lesson 1 ends with an active comprehension check.",
+      "passed": true,
+      "evidence": "Two-part check: Part 1 'Predict before you read' on _acquire_and_setup, Part 2 a live debug scenario ('pjb-abc123 stuck at pending'). Both are active, not trivia."
+    }
+  ]
+}

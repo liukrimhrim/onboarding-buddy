@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "skill_name": "mentor",
+    "skill_path": "/Users/jinxinliu/.claude/skills/mentor",
+    "executor_model": "claude-opus-4-7",
+    "timestamp": "2026-05-18T13:50:00Z",
+    "evals_run": [0, 1, 2],
+    "runs_per_configuration": 1
+  },
+
+  "runs": [
+    {
+      "eval_id": 0,
+      "eval_name": "parse-pipeline-curriculum",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 333.0,
+        "tokens": 85785,
+        "tool_calls": 53,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) BEFORE proposing the curriculum.", "passed": true, "evidence": "Intake asked 3 questions on goal/exposure/scope."},
+        {"text": "A curriculum markdown file is saved (copied into outputs/curriculum.md).", "passed": true, "evidence": "outputs/curriculum.md present and non-empty."},
+        {"text": "Curriculum contains a clear single-paragraph Goal section.", "passed": true, "evidence": "Concrete success criterion stated."},
+        {"text": "Curriculum has between 3 and 7 lessons.", "passed": true, "evidence": "5 lessons."},
+        {"text": "Curriculum or lesson 1 references at least 3 real file paths from this repo.", "passed": true, "evidence": "9+ verified file references with line numbers."},
+        {"text": "Lesson 1 opens with an explicit, verifiable goal statement.", "passed": true, "evidence": "Whiteboard-the-lifecycle goal stated explicitly."},
+        {"text": "Lesson 1 grounds in specific repo files first, then generalizes.", "passed": true, "evidence": "(a) Ground -> (b) Generalize -> (c) Compare order preserved."},
+        {"text": "Lesson 1 ends with an active comprehension check.", "passed": true, "evidence": "Predict-then-read on _acquire_and_setup + mini debug scenario."}
+      ]
+    },
+    {
+      "eval_id": 0,
+      "eval_name": "parse-pipeline-curriculum",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.875,
+        "passed": 7,
+        "failed": 1,
+        "total": 8,
+        "time_seconds": 225.6,
+        "tokens": 66572,
+        "tool_calls": 32,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) BEFORE proposing the curriculum.", "passed": true, "evidence": "Q1/Q2 asked at top of response."},
+        {"text": "A curriculum markdown file is saved (copied into outputs/curriculum.md).", "passed": false, "evidence": "No outputs/curriculum.md - baseline noted sandbox blocked save to ~/.claude/mentor-curricula/."},
+        {"text": "Curriculum contains a clear single-paragraph Goal section.", "passed": true, "evidence": "Goal stated."},
+        {"text": "Curriculum has between 3 and 7 lessons.", "passed": true, "evidence": "7 lessons."},
+        {"text": "Curriculum or lesson 1 references at least 3 real file paths from this repo.", "passed": true, "evidence": "Many file refs."},
+        {"text": "Lesson 1 opens with an explicit, verifiable goal statement.", "passed": true, "evidence": "Concrete goal stated."},
+        {"text": "Lesson 1 grounds in specific repo files first, then generalizes.", "passed": true, "evidence": "(a) Ground -> (b) Generalize -> (c) Compare structure."},
+        {"text": "Lesson 1 ends with an active comprehension check.", "passed": true, "evidence": "3 predict-before-reading questions."}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "temporal-bridge-repo-to-general",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 332.0,
+        "tokens": 89597,
+        "tool_calls": 40,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) BEFORE producing the lesson list.", "passed": true, "evidence": "Two intake questions, answered as simulated user."},
+        {"text": "A curriculum markdown file is saved to outputs/curriculum.md.", "passed": true, "evidence": "curriculum.md exists."},
+        {"text": "Curriculum has 4-6 lessons (user asked for ~5).", "passed": true, "evidence": "5 lessons."},
+        {"text": "Curriculum visibly covers BOTH repo-specific Temporal usage AND general workflow-engine concepts.", "passed": true, "evidence": "Lessons explicitly bridge: 'Concept:' subordinate on each lesson."},
+        {"text": "Curriculum or lesson 1 references at least 2 real Temporal-related file paths.", "passed": true, "evidence": "settings.py, topology_registrations.py, llamaparseWorkflow.ts, llamaParseActivity.ts, RUNBOOK.md, dynamic_worker.py."},
+        {"text": "Lesson 1 starts from real code in this repo and then ladders up to general Temporal concepts.", "passed": true, "evidence": "(a) Scene -> (b) Ground (5 walkthroughs) -> (c) Climb to the concept -> (d) Comparison."},
+        {"text": "Curriculum touches on Temporal's tradeoffs vs. alternatives.", "passed": true, "evidence": "Lesson 5 comparison with RabbitMQ/Step Functions/Celery; lesson 1 has 'why not RabbitMQ?' section."},
+        {"text": "Lesson 1 ends with an active exercise.", "passed": true, "evidence": "Two predict-before-reading exercises with answers below."}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "temporal-bridge-repo-to-general",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 6,
+        "failed": 2,
+        "total": 8,
+        "time_seconds": 149.2,
+        "tokens": 54428,
+        "tool_calls": 16,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) BEFORE producing the lesson list.", "passed": false, "evidence": "Baseline went straight into curriculum proposal; only an approval gate ('reply go') afterwards, no scoping questions."},
+        {"text": "A curriculum markdown file is saved to outputs/curriculum.md.", "passed": false, "evidence": "Content was only in response.md, no separate curriculum.md."},
+        {"text": "Curriculum has 4-6 lessons (user asked for ~5).", "passed": true, "evidence": "5 lessons."},
+        {"text": "Curriculum visibly covers BOTH repo-specific Temporal usage AND general workflow-engine concepts.", "passed": true, "evidence": "Explicit 'Repo lens / General lens' labeling on each lesson."},
+        {"text": "Curriculum or lesson 1 references at least 2 real Temporal-related file paths.", "passed": true, "evidence": "Many file refs."},
+        {"text": "Lesson 1 starts from real code in this repo and then ladders up to general Temporal concepts.", "passed": true, "evidence": "Section 1.2 LlamaCloud motivation -> 1.3 mental model -> 1.5 alternatives."},
+        {"text": "Curriculum touches on Temporal's tradeoffs vs. alternatives.", "passed": true, "evidence": "Section 1.5 covers Step Functions/Cadence/Airflow/Prefect/Dagster."},
+        {"text": "Lesson 1 ends with an active exercise.", "passed": true, "evidence": "Section 1.6 exercise: trace a workflow_id through Loki + Temporal UI + map to functions."}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "k8s-infra-curriculum",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.00,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 316.5,
+        "tokens": 66484,
+        "tool_calls": 35,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) before the curriculum.", "passed": true, "evidence": "Intake recap in lesson1.md shows goal/starting-point/scope questions answered."},
+        {"text": "A curriculum markdown file is saved to outputs/curriculum.md.", "passed": true, "evidence": "curriculum.md exists."},
+        {"text": "Curriculum references at least 3 real file paths under infra/.", "passed": true, "evidence": "deployment.yaml, service.yaml, ingress.yaml, alb.tf, eks/main.tf, hpa.yaml, karpenter-llamadeploy-nodepool.yaml."},
+        {"text": "Curriculum has 3-7 lessons.", "passed": true, "evidence": "6 lessons."},
+        {"text": "Curriculum covers general k8s/EKS concepts.", "passed": true, "evidence": "k8s control loop, L4 vs L7 service, IRSA, two-tier autoscaling."},
+        {"text": "Lesson 1 starts from a real file or set of files in infra/ and ladders to a general concept.", "passed": true, "evidence": "(a) Ground (infra/ tree) -> (b) Generalize (provisioning vs workload) -> (c) Compare."},
+        {"text": "Lesson 1 ends with an active comprehension check.", "passed": true, "evidence": "Three-tier check including the open-ended 'why does a k8s CRD live under terraform/' question."}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "k8s-infra-curriculum",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.571,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 56.8,
+        "tokens": 40158,
+        "tool_calls": 12,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "Response includes an intake exchange (1-3 questions) before the curriculum.", "passed": true, "evidence": "Q1/Q2 asked with multiple options."},
+        {"text": "A curriculum markdown file is saved to outputs/curriculum.md.", "passed": false, "evidence": "Only response.md exists; baseline stopped at 'waiting for user confirmation' before saving anything."},
+        {"text": "Curriculum references at least 3 real file paths under infra/.", "passed": true, "evidence": "Many references to infra/terraform/modules/eks/* and charts/."},
+        {"text": "Curriculum has 3-7 lessons.", "passed": true, "evidence": "7 lessons."},
+        {"text": "Curriculum covers general k8s/EKS concepts.", "passed": true, "evidence": "K8s networking layers, IRSA vs Pod Identity, Karpenter vs Cluster Autoscaler, GitOps."},
+        {"text": "Lesson 1 starts from a real file or set of files in infra/ and ladders to a general concept.", "passed": false, "evidence": "Baseline stopped at the plan and waited for user confirmation. Lesson 1 was never executed."},
+        {"text": "Lesson 1 ends with an active comprehension check.", "passed": false, "evidence": "No lesson 1 was run; no comprehension check."}
+      ]
+    }
+  ],
+
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 1.000, "stddev": 0.000, "min": 1.00, "max": 1.00},
+      "time_seconds": {"mean": 327.2, "stddev": 9.3, "min": 316.5, "max": 333.0},
+      "tokens": {"mean": 80622, "stddev": 12391, "min": 66484, "max": 89597}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.732, "stddev": 0.153, "min": 0.571, "max": 0.875},
+      "time_seconds": {"mean": 143.9, "stddev": 84.5, "min": 56.8, "max": 225.6},
+      "tokens": {"mean": 53719, "stddev": 13218, "min": 40158, "max": 66572}
+    },
+    "delta": {
+      "pass_rate": "+0.268",
+      "time_seconds": "+183.3",
+      "tokens": "+26903"
+    }
+  },
+
+  "notes": [
+    "Skill bumps pass rate from 73.2% to 100% with zero variance across 3 evals. The two baselines that failed assertions both stopped short of executing lesson 1 (k8s baseline) or persisting a curriculum file (all three baselines). The skill's value is enforcing the *full* workflow (intake -> plan -> save -> execute lesson), not the content of any single step.",
+    "Baselines are unusually strong: each one grounded in real files, included alternatives/comparison sections, and asked clarifying questions. This is partly because Claude defaults are already aligned with good tutoring shape - and partly because the skill description was visible in the available-skills list to the baseline subagents (methodological caveat worth noting).",
+    "Single-largest differentiator: file persistence. All three baselines failed the 'curriculum saved to outputs/curriculum.md' assertion. Two of three explicitly noted they *would* have saved to ~/.claude/mentor-curricula/ but the sandbox refused. This is a real-world environmental artifact for the test setup, not a skill defect - production usage would not hit it (and even the with-skill agents hit the same sandbox issue for the canonical path, but they at least wrote to the workspace copy).",
+    "Skill is ~2.3x slower (327s vs 144s mean) and uses ~1.5x tokens. The added cost is primarily the executor following the full workflow (more reading to ground, intake + plan + lesson, file writes). Acceptable tradeoff given the pass-rate jump.",
+    "Assertion that always passes regardless of skill: 'Curriculum references real file paths.' Both configurations did this confidently. Non-discriminating - consider replacing with a tighter check (e.g., 'at least 3 file refs include line numbers and link to verified existing files').",
+    "k8s baseline diverged most sharply: 0.571 pass rate vs 1.0 with-skill. The lesson-1 execution assertions (grounds-then-generalizes, comprehension check) were the entire delta - the baseline didn't run lesson 1 at all, stopping at 'waiting for user confirmation'. The skill explicitly instructs to proceed through plan -> approval -> lesson 1 as one motion when the user opens with 'run the first lesson too', so this is exactly the kind of contract the skill is enforcing."
+  ]
+}

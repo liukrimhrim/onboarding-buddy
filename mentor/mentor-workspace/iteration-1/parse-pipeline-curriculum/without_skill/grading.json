@@ -1,0 +1,47 @@
+{
+  "eval_id": 0,
+  "eval_name": "parse-pipeline-curriculum",
+  "configuration": "without_skill",
+  "expectations": [
+    {
+      "text": "Response includes an intake exchange (1-3 questions about goal/prior knowledge/scope) BEFORE proposing the curriculum.",
+      "passed": true,
+      "evidence": "response.md lines 3-12: Q1 (goal shape with three sub-options) and Q2 (starting point with Temporal-specific check) asked before the curriculum."
+    },
+    {
+      "text": "A curriculum markdown file is saved (copied into outputs/curriculum.md).",
+      "passed": false,
+      "evidence": "No outputs/curriculum.md exists — content was returned inline in response.md only. Baseline acknowledged: 'Writing there is currently blocked by sandbox permissions in this session.'"
+    },
+    {
+      "text": "Curriculum contains a clear single-paragraph Goal section.",
+      "passed": true,
+      "evidence": "response.md line 20: 'Goal. Build enough mental model of the LlamaCloud parse pipeline that, given a pjb-... job ID and a symptom...'"
+    },
+    {
+      "text": "Curriculum has between 3 and 7 lessons.",
+      "passed": true,
+      "evidence": "7 lessons listed (right at the upper bound)."
+    },
+    {
+      "text": "Curriculum or lesson 1 references at least 3 real file paths from this repo.",
+      "passed": true,
+      "evidence": "References: services_v2/parse/, managed_service.py:288/353/318/387/390, src/temporal/client.py, backend/jobs/, idempotency.py, worker.ts, workerRole.ts, generated-queues.ts."
+    },
+    {
+      "text": "Lesson 1 opens with an explicit, verifiable goal statement.",
+      "passed": true,
+      "evidence": "response.md line 44: 'Goal. By the end of this lesson, you can answer: \"What columns of a parse job row exist...\"'"
+    },
+    {
+      "text": "Lesson 1 grounds in specific repo files first, then generalizes (concrete → concept order).",
+      "passed": true,
+      "evidence": "Sections (a) Ground (with managed_service.py walkthrough) → (b) Generalize (command/state separation) → (c) Compare (Temporal vs RabbitMQ) → (d) Check."
+    },
+    {
+      "text": "Lesson 1 ends with an active comprehension check.",
+      "passed": true,
+      "evidence": "(d) Comprehension check: 3 predict-before-reading questions about line 318/387, error handling, and id=workflow_id semantics."
+    }
+  ]
+}
