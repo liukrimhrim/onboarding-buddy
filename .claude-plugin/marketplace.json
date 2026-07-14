@@ -1,0 +1,14 @@
+{
+  "name": "my-claude-skills",
+  "owner": {
+    "name": "liukrimhrim"
+  },
+  "description": "liukrimhrim's Claude Code skills",
+  "plugins": [
+    {
+      "name": "codebase-reading",
+      "source": "./plugins/codebase-reading",
+      "description": "Salience-map onboarding for unfamiliar repos: mine backbone, churn, discussion, and incident layers into a tiered reading roadmap, with git/PR archaeology for the why."
+    }
+  ]
+}
