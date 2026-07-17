@@ -1,0 +1,15 @@
+{
+  "name": "mentor",
+  "version": "1.0.0",
+  "description": "Multi-session repo tutor: curated lesson curricula grounded in real files, mastery points, quizzes with a validating close-out gate, resumable across sessions.",
+  "author": { "name": "liukrimhrim" },
+  "repository": "https://github.com/liukrimhrim/onboarding-buddy",
+  "license": "MIT",
+  "keywords": ["tutoring", "curriculum", "onboarding", "learning", "quizzes"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Mentor",
+    "shortDescription": "Tutored curricula over your codebase, with quizzes.",
+    "category": "Developer Tools"
+  }
+}
