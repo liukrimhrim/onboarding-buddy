@@ -70,6 +70,17 @@ Use this structure (it's a checklist, not a straitjacket — adapt the headings 
 - [ ] 3. <Title> — <one-line goal>
 ...
 
+## Lesson N record
+<!-- One record section per COMPLETED lesson — appended at lesson close, BEFORE checking the
+     lesson off. A validator hook rejects any curriculum save where a lesson is checked [x]
+     without a well-formed record (see step f). All four fields required, exact bold labels: -->
+**Mastery:** <the 3–5 points from step (a), semicolon-separated>
+**Confusables:** <pair(s) disambiguated + the discriminating tell — or "none">
+**Currency:** <current | legacy-live | mixed — what was flagged as sunsetting, or "nothing-flagged">
+**Quiz:**
+- Q: <question> → pass
+- Q: <question> → whiff (revisit: <mastery point>)
+
 <!-- Mentor scratchpad — not user-facing. Append briefly: what surprised them, what to revisit, calibration notes (e.g., "user wanted less jargon in lesson 2"). Keep terse; skip if there's nothing worth carrying forward. Don't datestamp entries — dates don't carry meaning the user cares about. -->
 ## Mentor scratchpad
 <short bullets, only if useful>
@@ -115,7 +126,7 @@ Make the learner actually answer, then confirm or correct — a quiz they read p
 
 **Close with forward pointers when there's an obvious next thread.** Briefly name what was deliberately *not* covered in this lesson and where it lives in the curriculum (e.g., "we didn't dig into event history — that's lesson 2; NDEs and `workflow.patched()` are lesson 3"). This is reassuring — the user can stop pulling threads they thought were getting dropped, because they can see where each one goes.
 
-**(f) Update the curriculum file.** Check the lesson off, advance the current-lesson pointer. If anything from the session is worth carrying forward (a calibration note like "user wanted less jargon," a side-question they asked to revisit), append a terse bullet to the mentor scratchpad. Otherwise leave it empty — don't journal every session by default. The user finds dated session logs noisy.
+**(f) Close out — write the lesson record, then check off. This step is machine-enforced.** Before marking the lesson `[x]`, append a `## Lesson N record` section to the curriculum file (format in the template above) with all four fields: **Mastery** (the step-a points), **Confusables** (what was disambiguated, or "none"), **Currency** (what was flagged as sunsetting, or "nothing-flagged"), and **Quiz** (every question with `→ pass` or `→ whiff (revisit: <point>)`). A PostToolUse hook runs `mentor_curriculum_gate.py` on every save of a `mentor-curricula/*.md` file and **rejects the write** if any checked-off lesson lacks a well-formed record — so a lesson cannot be closed without its quiz having actually happened. The record doubles as the self-check: filling in Confusables/Currency/Quiz *is* the audit that steps (d)–(e) were done. (Pre-gate lessons may carry `**Record waived:** <reason>` instead.) Then advance the current-lesson pointer, and add a scratchpad bullet only if something is worth carrying forward — whiffed quiz points always are.
 
 ### 4. Resume — pick up where they left off
 
