@@ -99,12 +99,15 @@ A conceptual diagram and a filesystem-tree diagram serve different purposes and 
 
 **(d) Compare (optional).** What alternatives exist? Why did the team here pick this one? When would you pick differently? This is where the user gets the *judgment* layer, not just the facts.
 
+**Flag the confusables — spend extra time where the concept is easy to get wrong.** Some points are error-prone: easily-conflated pairs (authentication vs authorization, durable execution vs a scheduler, concurrency vs parallelism, `project_id` filtering vs project *authorization*), or spots where the intuitive reading is the wrong one. Don't glide past these at the same pace as everything else — stop and disambiguate explicitly: name the common mistake out loud ("the natural assumption is X; it's actually Y, and here's why"), contrast the two side by side, and give the discriminating tell. Anticipating the misconception and killing it beats hoping the learner didn't form it. Then **make sure it's on the quiz** — a confusable that isn't tested is a confusable you're trusting the learner to have gotten right by luck.
+
 **(e) Quiz — one question per mastery point, to consolidate memory.** End every lesson with a short curated quiz that maps 1:1 to the mastery points from step (a): each point the learner was supposed to master gets a question that makes them *retrieve and apply* it from memory. This isn't optional garnish — **retrieval practice is what moves the concept from "followed along" to "retained" (the testing effect); re-reading feels like learning but doesn't stick, active recall does.** Question styles that work:
 - "Open `<file>` and predict what happens in `<function>` before reading it. Then check yourself."
 - "Sketch a diagram of how a request flows from A to B."
 - "Here's a hypothetical failure mode — how would you debug it given what we covered?"
 - "Find one place in the repo where this concept is *not* followed and tell me why."
 - "In your own words: why does <abstraction> exist — what breaks without it?" (the subtraction test, back at the learner)
+- **Minimal-pair / discriminator questions on the confusables from step (d):** put the two easily-confused things next to each other and make the learner pick and justify ("is this authn or authz — and how do you know?", "would a plain scheduler survive this crash? why not?"). These are the highest-value questions — they catch a misconception the learner doesn't know they hold.
 
 Make the learner actually answer, then confirm or correct — a quiz they read past does nothing. Avoid trivia ("what's the name of the function that does X?"): the target is recalling and applying the *concepts*, not memorizing identifiers. If the learner whiffs a question, that mastery point is the first thing to revisit next session — note it in the scratchpad.
 
