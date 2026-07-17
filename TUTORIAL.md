@@ -112,7 +112,33 @@ was quizzed, what you got right or wrong). If not, the save is rejected with
 an error telling Claude exactly what's missing. You never have to think about
 it — it just quietly enforces honesty.
 
-### 2d. Optional booster: graphify
+### 2d. Not on Claude Code? These skills are just markdown
+
+Nothing in these skills is Claude-Code-specific at the core: a skill is a
+`SKILL.md` instruction file, and the quiz gate is a plain stdlib-Python
+script. To use them with another coding agent (Codex, Cursor, or anything
+that reads instruction files):
+
+1. **Give the agent the skill text.** Copy `plugins/mentor/skills/mentor/`
+   into wherever your agent discovers instructions — e.g. the shared
+   `~/.agents/skills/` convention, your agent's skills directory, or paste
+   `SKILL.md` into its custom-instructions slot.
+2. **Run the gate without hooks.** The validator works standalone:
+
+   ```sh
+   python3 scripts/mentor_curriculum_gate.py ~/.mentor-curricula/<topic>.md
+   ```
+
+   Wire it into whatever your agent offers (a save-hook, a pre-commit hook,
+   or just run it before ending a session). Exit code 0 = clean; 2 = a
+   lesson was closed without its quiz record, with the reason printed.
+3. **Curricula are plain markdown** in `~/.mentor-curricula/` — readable and
+   editable by hand, no lock-in.
+
+The same goes for `codebase-reading`: its mining commands are ordinary
+`git`/`grep`/`gh` shell invocations any agent can run.
+
+### 2e. Optional booster: graphify
 
 codebase-reading works better if [graphify](https://github.com/Graphify-Labs/graphify)
 is installed — it builds a real dependency graph (which files call which),
