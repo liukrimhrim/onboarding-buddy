@@ -60,25 +60,27 @@ Or from inside a Claude Code session:
 
 Update later with `/plugin marketplace update onboarding-buddy`.
 
-### 2b. mentor (copy two paths)
+### 2b. mentor (one command)
 
-`mentor` isn't in the plugin marketplace yet; install it by copying its
-folder into your personal skills directory:
+Also a plugin — and installing it brings the quiz gate (below) along
+automatically:
 
 ```sh
-git clone git@github.com:liukrimhrim/onboarding-buddy.git
-mkdir -p ~/.claude/skills
-cp -r onboarding-buddy/mentor/mentor ~/.claude/skills/mentor
+claude plugin install mentor@onboarding-buddy
 ```
 
-That's it — Claude Code discovers skills in `~/.claude/skills/` automatically.
-
-### 2c. mentor's quiz gate (optional but recommended)
+### 2c. mentor's quiz gate
 
 The mentor skill has a *hard gate*: a small script that refuses to let a
 lesson be marked "done" unless its quiz actually happened and was recorded.
 Without it, the quiz rule is just prose that an AI can accidentally skip.
 With it, skipping is impossible.
+
+**If you installed mentor as a plugin (2b), you already have it** — the
+plugin registers the hook itself; nothing to configure.
+
+<details>
+<summary>Manual install only (skill copied into <code>~/.claude/skills/</code>)</summary>
 
 Add this to the `"hooks"` section of `~/.claude/settings.json` (create the
 `PostToolUse` list if it doesn't exist):
@@ -102,13 +104,41 @@ Add this to the `"hooks"` section of `~/.claude/settings.json` (create the
 }
 ```
 
-What this does: every time Claude Code saves a curriculum file, the script
+</details>
+
+What the gate does: every time Claude Code saves a curriculum file, the script
 checks that each completed lesson has a proper record (what was taught, what
 was quizzed, what you got right or wrong). If not, the save is rejected with
 an error telling Claude exactly what's missing. You never have to think about
 it — it just quietly enforces honesty.
 
-### 2d. Optional booster: graphify
+### 2d. Not on Claude Code? These skills are just markdown
+
+Nothing in these skills is Claude-Code-specific at the core: a skill is a
+`SKILL.md` instruction file, and the quiz gate is a plain stdlib-Python
+script. To use them with another coding agent (Codex, Cursor, or anything
+that reads instruction files):
+
+1. **Give the agent the skill text.** Copy `plugins/mentor/skills/mentor/`
+   into wherever your agent discovers instructions — e.g. the shared
+   `~/.agents/skills/` convention, your agent's skills directory, or paste
+   `SKILL.md` into its custom-instructions slot.
+2. **Run the gate without hooks.** The validator works standalone:
+
+   ```sh
+   python3 scripts/mentor_curriculum_gate.py ~/.mentor-curricula/<topic>.md
+   ```
+
+   Wire it into whatever your agent offers (a save-hook, a pre-commit hook,
+   or just run it before ending a session). Exit code 0 = clean; 2 = a
+   lesson was closed without its quiz record, with the reason printed.
+3. **Curricula are plain markdown** in `~/.mentor-curricula/` — readable and
+   editable by hand, no lock-in.
+
+The same goes for `codebase-reading`: its mining commands are ordinary
+`git`/`grep`/`gh` shell invocations any agent can run.
+
+### 2e. Optional booster: graphify
 
 codebase-reading works better if [graphify](https://github.com/Graphify-Labs/graphify)
 is installed — it builds a real dependency graph (which files call which),

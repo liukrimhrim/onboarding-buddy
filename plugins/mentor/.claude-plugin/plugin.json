@@ -1,0 +1,33 @@
+{
+  "name": "mentor",
+  "displayName": "Mentor",
+  "version": "1.0.0",
+  "description": "Multi-session repo tutor: curated lesson curricula grounded in real files, mastery points, quizzes with a machine-enforced close-out gate, resumable across sessions.",
+  "author": {
+    "name": "liukrimhrim"
+  },
+  "repository": "https://github.com/liukrimhrim/onboarding-buddy",
+  "license": "MIT",
+  "keywords": [
+    "tutoring",
+    "curriculum",
+    "onboarding",
+    "learning",
+    "quizzes"
+  ],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/skills/mentor/scripts/mentor_curriculum_gate.py\"",
+            "timeout": 10,
+            "statusMessage": "Validating mentor curriculum records"
+          }
+        ]
+      }
+    ]
+  }
+}
