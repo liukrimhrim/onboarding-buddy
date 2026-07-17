@@ -9,6 +9,11 @@
       "name": "codebase-reading",
       "source": "./plugins/codebase-reading",
       "description": "Salience-map onboarding for unfamiliar repos: mine backbone, churn, discussion, and incident layers into a tiered reading roadmap, with git/PR archaeology for the why."
+    },
+    {
+      "name": "mentor",
+      "source": "./plugins/mentor",
+      "description": "Multi-session repo tutor: curated curricula, file-grounded lessons that climb to general concepts, quizzes with a hard close-out gate, resumable across sessions."
     }
   ]
 }

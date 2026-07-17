@@ -60,25 +60,27 @@ Or from inside a Claude Code session:
 
 Update later with `/plugin marketplace update onboarding-buddy`.
 
-### 2b. mentor (copy two paths)
+### 2b. mentor (one command)
 
-`mentor` isn't in the plugin marketplace yet; install it by copying its
-folder into your personal skills directory:
+Also a plugin — and installing it brings the quiz gate (below) along
+automatically:
 
 ```sh
-git clone git@github.com:liukrimhrim/onboarding-buddy.git
-mkdir -p ~/.claude/skills
-cp -r onboarding-buddy/mentor/mentor ~/.claude/skills/mentor
+claude plugin install mentor@onboarding-buddy
 ```
 
-That's it — Claude Code discovers skills in `~/.claude/skills/` automatically.
-
-### 2c. mentor's quiz gate (optional but recommended)
+### 2c. mentor's quiz gate
 
 The mentor skill has a *hard gate*: a small script that refuses to let a
 lesson be marked "done" unless its quiz actually happened and was recorded.
 Without it, the quiz rule is just prose that an AI can accidentally skip.
 With it, skipping is impossible.
+
+**If you installed mentor as a plugin (2b), you already have it** — the
+plugin registers the hook itself; nothing to configure.
+
+<details>
+<summary>Manual install only (skill copied into <code>~/.claude/skills/</code>)</summary>
 
 Add this to the `"hooks"` section of `~/.claude/settings.json` (create the
 `PostToolUse` list if it doesn't exist):
@@ -102,7 +104,9 @@ Add this to the `"hooks"` section of `~/.claude/settings.json` (create the
 }
 ```
 
-What this does: every time Claude Code saves a curriculum file, the script
+</details>
+
+What the gate does: every time Claude Code saves a curriculum file, the script
 checks that each completed lesson has a proper record (what was taught, what
 was quizzed, what you got right or wrong). If not, the save is rejected with
 an error telling Claude exactly what's missing. You never have to think about

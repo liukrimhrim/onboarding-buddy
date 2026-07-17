@@ -10,6 +10,7 @@ workflow, and best practices, written for beginners.
 ```sh
 claude plugin marketplace add liukrimhrim/onboarding-buddy
 claude plugin install codebase-reading@onboarding-buddy
+claude plugin install mentor@onboarding-buddy
 ```
 
 Or interactively inside Claude Code: `/plugin marketplace add
@@ -43,8 +44,8 @@ lessons, each grounded in real files, climbing to the general concept, ending
 in a quiz mapped to explicit mastery points. Confusables get disambiguated and
 tested; deprecated code is down-weighted but not skipped; a validator hook
 hard-enforces that no lesson closes without its quiz recorded. Curricula
-persist across sessions. Install by copying `mentor/mentor` to
-`~/.claude/skills/mentor` — see the [tutorial](TUTORIAL.md#2b-mentor-copy-two-paths).
+persist across sessions. Installing the plugin also registers the validator
+hook automatically — see the [tutorial](TUTORIAL.md#2b-mentor-one-command).
 
 Trigger it with *“tutor me on X”*, *“build me a learning plan”*, or
 *“continue my curriculum”*.
