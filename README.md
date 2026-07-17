@@ -1,4 +1,4 @@
-# my-claude-skills
+# onboarding-buddy
 
 [Claude Code](https://code.claude.com) plugin marketplace for my skills.
 
@@ -8,14 +8,14 @@ workflow, and best practices, written for beginners.
 ## Install
 
 ```sh
-claude plugin marketplace add liukrimhrim/my-claude-skills
-claude plugin install codebase-reading@my-claude-skills
+claude plugin marketplace add liukrimhrim/onboarding-buddy
+claude plugin install codebase-reading@onboarding-buddy
 ```
 
 Or interactively inside Claude Code: `/plugin marketplace add
-liukrimhrim/my-claude-skills`, then `/plugin install
-codebase-reading@my-claude-skills`. Update later with
-`/plugin marketplace update my-claude-skills`.
+liukrimhrim/onboarding-buddy`, then `/plugin install
+codebase-reading@onboarding-buddy`. Update later with
+`/plugin marketplace update onboarding-buddy`.
 
 ## Skills
 

@@ -47,18 +47,18 @@ You need [Claude Code](https://code.claude.com) installed and working first.
 It's published as a plugin. In your terminal:
 
 ```sh
-claude plugin marketplace add liukrimhrim/my-claude-skills
-claude plugin install codebase-reading@my-claude-skills
+claude plugin marketplace add liukrimhrim/onboarding-buddy
+claude plugin install codebase-reading@onboarding-buddy
 ```
 
 Or from inside a Claude Code session:
 
 ```
-/plugin marketplace add liukrimhrim/my-claude-skills
-/plugin install codebase-reading@my-claude-skills
+/plugin marketplace add liukrimhrim/onboarding-buddy
+/plugin install codebase-reading@onboarding-buddy
 ```
 
-Update later with `/plugin marketplace update my-claude-skills`.
+Update later with `/plugin marketplace update onboarding-buddy`.
 
 ### 2b. mentor (copy two paths)
 
@@ -66,9 +66,9 @@ Update later with `/plugin marketplace update my-claude-skills`.
 folder into your personal skills directory:
 
 ```sh
-git clone git@github.com:liukrimhrim/my-claude-skills.git
+git clone git@github.com:liukrimhrim/onboarding-buddy.git
 mkdir -p ~/.claude/skills
-cp -r my-claude-skills/mentor/mentor ~/.claude/skills/mentor
+cp -r onboarding-buddy/mentor/mentor ~/.claude/skills/mentor
 ```
 
 That's it — Claude Code discovers skills in `~/.claude/skills/` automatically.
