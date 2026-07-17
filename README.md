@@ -20,8 +20,24 @@ claude plugin install mentor@onboarding-buddy
 
 Or interactively inside Claude Code: `/plugin marketplace add
 liukrimhrim/onboarding-buddy`, then `/plugin install
-codebase-reading@onboarding-buddy`. Update later with
+codebase-reading@onboarding-buddy` and `/plugin install
+mentor@onboarding-buddy`. Update later with
 `/plugin marketplace update onboarding-buddy`.
+
+**Other ways to install** — no marketplace required:
+
+- **Manual copy** (Claude Code, no plugin system): copy a skill folder into
+  `~/.claude/skills/` — note the mentor quiz gate then needs a one-time hook
+  snippet ([tutorial §2c](TUTORIAL.md#2c-mentors-quiz-gate)).
+- **Team install**: commit a skill folder into your repo's `.claude/skills/`
+  — everyone who opens the repo gets it, zero individual setup.
+- **Local marketplace** (offline / hacking on the skills):
+  `claude plugin marketplace add /path/to/clone`.
+- **Any other agent**: the skills are plain markdown + a stdlib script —
+  copy the folder into your agent's skills/instructions mechanism
+  ([tutorial §2d](TUTORIAL.md#2d-any-other-agent--these-skills-are-just-markdown)).
+
+Details for each: [tutorial §2](TUTORIAL.md#2-install).
 
 ## Skills
 
@@ -50,7 +66,7 @@ in a quiz mapped to explicit mastery points. Confusables get disambiguated and
 tested; deprecated code is down-weighted but not skipped; a validator hook
 hard-enforces that no lesson closes without its quiz recorded. Curricula
 persist across sessions. Installing the plugin also registers the validator
-hook automatically — see the [tutorial](TUTORIAL.md#2b-mentor-one-command).
+hook automatically — see the [tutorial](TUTORIAL.md#2b-mentor-on-claude-code-one-command).
 
 Trigger it with *“tutor me on X”*, *“build me a learning plan”*, or
 *“continue my curriculum”*.
