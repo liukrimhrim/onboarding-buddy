@@ -75,6 +75,40 @@ automatically:
 claude plugin install mentor@onboarding-buddy
 ```
 
+#### Other ways to install on Claude Code
+
+The marketplace is the easiest path, but not the only one:
+
+- **Manual copy (no plugin system).** Clone this repo and copy a skill into
+  your personal skills directory — Claude Code discovers it automatically:
+
+  ```sh
+  git clone https://github.com/liukrimhrim/onboarding-buddy.git
+  cp -r onboarding-buddy/plugins/mentor/skills/mentor ~/.claude/skills/mentor
+  cp -r onboarding-buddy/plugins/codebase-reading/skills/codebase-reading ~/.claude/skills/codebase-reading
+  ```
+
+  Note: a manually copied mentor does *not* auto-register the quiz gate —
+  add the hook snippet in 2c below. You also won't get marketplace updates;
+  `git pull` and re-copy instead.
+
+- **Project-level install (share with your team).** Copy a skill into a
+  repo's `.claude/skills/` directory and commit it — everyone who opens that
+  repo with Claude Code gets the skill, no individual setup:
+
+  ```sh
+  cp -r onboarding-buddy/plugins/mentor/skills/mentor <your-repo>/.claude/skills/mentor
+  ```
+
+- **Local marketplace (offline, or for hacking on the skills).** Point the
+  marketplace at your clone instead of GitHub — edits to the clone take
+  effect on the next update, no publishing needed:
+
+  ```sh
+  claude plugin marketplace add /path/to/onboarding-buddy
+  claude plugin install mentor@onboarding-buddy
+  ```
+
 ### 2c. mentor's quiz gate
 
 The mentor skill has a *hard gate*: a small script that refuses to let a
@@ -127,8 +161,11 @@ instruction files):
 
 1. **Give the agent the skill text.** Copy `plugins/mentor/skills/mentor/`
    into wherever your agent discovers instructions — e.g. the shared
-   `~/.agents/skills/` convention, your agent's skills directory, or paste
-   `SKILL.md` into its custom-instructions slot.
+   `~/.agents/skills/` convention, your agent's skills directory (Codex:
+   reference it from `AGENTS.md`; Cursor: a rules/instructions entry), or
+   paste `SKILL.md` into its custom-instructions slot. To share with a team,
+   commit the skill folder into your project repo and reference it from the
+   repo's `AGENTS.md`/`CLAUDE.md` — everyone's agent picks it up from there.
 2. **Run the gate without hooks.** The validator works standalone:
 
    ```sh
