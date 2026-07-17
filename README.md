@@ -1,6 +1,10 @@
 # onboarding-buddy
 
-[Claude Code](https://code.claude.com) plugin marketplace for my skills.
+Agent-neutral onboarding skills — map an unfamiliar repo, then learn it
+through a tutored curriculum. Packaged as a [Claude Code](https://code.claude.com)
+plugin marketplace for one-command install; the skills themselves are plain
+markdown + a stdlib Python validator, usable from any coding agent (see the
+[tutorial](TUTORIAL.md#2d-not-on-claude-code-these-skills-are-just-markdown)).
 
 **New here? Start with the [step-by-step tutorial](TUTORIAL.md)** — install,
 workflow, and best practices, written for beginners.

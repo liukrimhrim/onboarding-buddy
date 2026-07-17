@@ -2,17 +2,20 @@
 
 This guide explains, from zero, how to install and use the two skills in this
 repo, how they work together, and the habits that make them effective. No
-prior experience with Claude Code skills is assumed. If you already know what
+prior experience with coding-agent skills is assumed. If you already know what
 a skill is, jump to [Install](#2-install).
 
 ---
 
 ## 1. What are these skills?
 
-**Claude Code** is Anthropic's AI coding assistant that runs in your terminal.
-A **skill** is a set of written instructions that teaches Claude Code a
+A **skill** is a set of written instructions that teaches an AI coding agent a
 repeatable workflow — like a recipe card it pulls out when you ask for that
-kind of task.
+kind of task. These two skills are plain markdown plus one small Python
+script, so they work with any agent that reads instruction files.
+[**Claude Code**](https://code.claude.com) (Anthropic's coding assistant) gets
+the smoothest ride — one-command plugin install — and is what this guide
+shows; using another agent only changes the install step (section 2d).
 
 This repo contains two skills that solve one problem together: **you've been
 handed a big unfamiliar codebase, and you need to actually understand it —
@@ -40,7 +43,8 @@ knowledge **stick**. Use them in that order.
 
 ## 2. Install
 
-You need [Claude Code](https://code.claude.com) installed and working first.
+The commands below assume [Claude Code](https://code.claude.com). On another
+agent, skip to [section 2d](#2d-not-on-claude-code-these-skills-are-just-markdown).
 
 ### 2a. codebase-reading (one command)
 
@@ -106,7 +110,7 @@ Add this to the `"hooks"` section of `~/.claude/settings.json` (create the
 
 </details>
 
-What the gate does: every time Claude Code saves a curriculum file, the script
+What the gate does: every time your agent saves a curriculum file, the script
 checks that each completed lesson has a proper record (what was taught, what
 was quizzed, what you got right or wrong). If not, the save is rejected with
 an error telling Claude exactly what's missing. You never have to think about
@@ -166,7 +170,7 @@ The full journey, start to finish:
 
 ### Step ① — map the repo
 
-Open Claude Code inside the repo and say:
+Open your agent (Claude Code shown) inside the repo and say:
 
 > build me a salience map of this repo and onboard me
 
@@ -196,11 +200,11 @@ choices smart instead of random.
 
 ### Step ② — learn it with mentor
 
-In a Claude Code session, say:
+In an agent session, say:
 
 > /mentor — build me a curriculum to learn this repo, seeded from my salience map
 
-Mentor writes a syllabus (3–7 lessons) to `~/.claude/mentor-curricula/` and
+Mentor writes a syllabus (3–7 lessons) to `~/.mentor-curricula/` and
 shows it to you. Push back if a lesson looks wrong — it's your syllabus.
 
 Then run lessons one at a time ("start lesson 1", later "continue"). Every
