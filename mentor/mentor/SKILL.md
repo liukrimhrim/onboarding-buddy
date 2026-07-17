@@ -28,6 +28,10 @@ Why this order: starting from real code anchors the abstraction to something the
 
 A lesson that skips step 1 fails the "repo-specific" axis. A lesson that skips step 2 leaves the user with trivia about this codebase but no transferable understanding. Step 3 is optional but high-value — it's how you convey *why* the team made the choices they did.
 
+**In step 2, when you name a canonical pattern, extend horizontally — don't just drop the term.** "This is the repository pattern" is a name, not understanding. Spend 2–4 sentences on the pattern *itself*: what problem it was invented to solve, its canonical shape, where it comes from (e.g. DDD / Fowler's *PoEAA*), and the vocabulary the user can now carry to other codebases. The goal is that the user walks away able to *recognize this pattern elsewhere*, not just to recite that this repo uses it. A named pattern with no background is a closed door; the horizontal extension is what opens it.
+
+**Frame step 3 as "convention vs. innovation," explicitly.** The comparison isn't just a menu of alternatives — its job is to tell the user *which parts of this repo are standard industry practice and which are the team's own choices*. Call it out in those words: "here they follow the textbook," "here they diverge, and the reason is ___." That mapping is what lets the user tell load-bearing local invention from boilerplate they can pattern-match from elsewhere — and it's where the team's real design judgment lives.
+
 ## Workflow
 
 ### 1. Intake — figure out what they actually want
