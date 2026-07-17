@@ -13,9 +13,10 @@ A **skill** is a set of written instructions that teaches an AI coding agent a
 repeatable workflow — like a recipe card it pulls out when you ask for that
 kind of task. These two skills are plain markdown plus one small Python
 script, so they work with any agent that reads instruction files.
-[**Claude Code**](https://code.claude.com) (Anthropic's coding assistant) gets
-the smoothest ride — one-command plugin install — and is what this guide
-shows; using another agent only changes the install step (section 2d).
+Any agent works. [**Claude Code**](https://code.claude.com) (Anthropic's
+coding assistant) is the recommended one — it gets a one-command plugin
+install and automatic hook wiring — but only the install step differs
+between agents (sections 2a–2c for Claude Code, 2d for everything else).
 
 This repo contains two skills that solve one problem together: **you've been
 handed a big unfamiliar codebase, and you need to actually understand it —
@@ -43,10 +44,11 @@ knowledge **stick**. Use them in that order.
 
 ## 2. Install
 
-The commands below assume [Claude Code](https://code.claude.com). On another
-agent, skip to [section 2d](#2d-not-on-claude-code-these-skills-are-just-markdown).
+Pick your path: sections 2a–2c cover [Claude Code](https://code.claude.com)
+(recommended, one-command install); [section 2d](#2d-any-other-agent--these-skills-are-just-markdown)
+covers every other agent.
 
-### 2a. codebase-reading (one command)
+### 2a. codebase-reading on Claude Code (one command)
 
 It's published as a plugin. In your terminal:
 
@@ -64,7 +66,7 @@ Or from inside a Claude Code session:
 
 Update later with `/plugin marketplace update onboarding-buddy`.
 
-### 2b. mentor (one command)
+### 2b. mentor on Claude Code (one command)
 
 Also a plugin — and installing it brings the quiz gate (below) along
 automatically:
@@ -113,15 +115,15 @@ Add this to the `"hooks"` section of `~/.claude/settings.json` (create the
 What the gate does: every time your agent saves a curriculum file, the script
 checks that each completed lesson has a proper record (what was taught, what
 was quizzed, what you got right or wrong). If not, the save is rejected with
-an error telling Claude exactly what's missing. You never have to think about
+an error telling the agent exactly what's missing. You never have to think about
 it — it just quietly enforces honesty.
 
-### 2d. Not on Claude Code? These skills are just markdown
+### 2d. Any other agent — these skills are just markdown
 
-Nothing in these skills is Claude-Code-specific at the core: a skill is a
-`SKILL.md` instruction file, and the quiz gate is a plain stdlib-Python
-script. To use them with another coding agent (Codex, Cursor, or anything
-that reads instruction files):
+Nothing in these skills is tied to one agent: a skill is a `SKILL.md`
+instruction file, and the quiz gate is a plain stdlib-Python script. To use
+them with any coding agent (Codex, Cursor, or anything that reads
+instruction files):
 
 1. **Give the agent the skill text.** Copy `plugins/mentor/skills/mentor/`
    into wherever your agent discovers instructions — e.g. the shared
@@ -170,7 +172,7 @@ The full journey, start to finish:
 
 ### Step ① — map the repo
 
-Open your agent (Claude Code shown) inside the repo and say:
+Open your coding agent inside the repo and say:
 
 > build me a salience map of this repo and onboard me
 
@@ -280,7 +282,7 @@ over incidents" — same data, much friendlier output.
 
 **"The curriculum save was rejected with 'mentor curriculum gate FAILED'."**
 Working as intended: a lesson was checked off without a complete record.
-Claude will fix the record and re-save; you don't need to do anything. If a
+The agent will fix the record and re-save; you don't need to do anything. If a
 lesson legitimately predates the gate, the record can say
 `**Record waived:** <reason>`.
 
