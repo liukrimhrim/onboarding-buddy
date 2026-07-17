@@ -16,7 +16,7 @@ script, so they work with any agent that reads instruction files.
 Any agent works. [**Claude Code**](https://code.claude.com) (Anthropic's
 coding assistant) is the recommended one — it gets a one-command plugin
 install and automatic hook wiring — but only the install step differs
-between agents (sections 2a–2c for Claude Code, 2d for everything else).
+between agents (sections 2a–2c for Claude Code, 2d for Codex, 2e for everything else).
 
 This repo contains two skills that solve one problem together: **you've been
 handed a big unfamiliar codebase, and you need to actually understand it —
@@ -45,8 +45,9 @@ knowledge **stick**. Use them in that order.
 ## 2. Install
 
 Pick your path: sections 2a–2c cover [Claude Code](https://code.claude.com)
-(recommended, one-command install); [section 2d](#2d-any-other-agent--these-skills-are-just-markdown)
-covers every other agent.
+(recommended, one-command install); [section 2d](#2d-codex-native-plugin-install)
+covers Codex (also a native marketplace); [section 2e](#2e-any-other-agent--these-skills-are-just-markdown)
+covers everything else.
 
 ### 2a. codebase-reading on Claude Code (one command)
 
@@ -152,7 +153,23 @@ was quizzed, what you got right or wrong). If not, the save is rejected with
 an error telling the agent exactly what's missing. You never have to think about
 it — it just quietly enforces honesty.
 
-### 2d. Any other agent — these skills are just markdown
+### 2d. Codex (native plugin install)
+
+OpenAI's Codex has its own plugin marketplace (since March 2026), and this
+repo ships Codex manifests alongside the Claude Code ones — same skills, no
+copying:
+
+```sh
+codex plugin marketplace add liukrimhrim/onboarding-buddy
+```
+
+Then run `/plugins` inside Codex to browse and install `codebase-reading`
+and `mentor`. One caveat: the mentor quiz gate is not yet auto-wired on
+Codex (its hook system differs) — run it standalone instead, exactly as
+described in [section 2e](#2e-any-other-agent--these-skills-are-just-markdown)
+step 2.
+
+### 2e. Any other agent — these skills are just markdown
 
 Nothing in these skills is tied to one agent: a skill is a `SKILL.md`
 instruction file, and the quiz gate is a plain stdlib-Python script. To use
@@ -181,7 +198,7 @@ instruction files):
 The same goes for `codebase-reading`: its mining commands are ordinary
 `git`/`grep`/`gh` shell invocations any agent can run.
 
-### 2e. Optional booster: graphify
+### 2f. Optional booster: graphify
 
 codebase-reading works better if [graphify](https://github.com/Graphify-Labs/graphify)
 is installed — it builds a real dependency graph (which files call which),

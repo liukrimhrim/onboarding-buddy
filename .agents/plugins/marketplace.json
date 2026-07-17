@@ -1,0 +1,20 @@
+{
+  "name": "onboarding-buddy",
+  "interface": {
+    "displayName": "Onboarding Buddy"
+  },
+  "plugins": [
+    {
+      "name": "codebase-reading",
+      "source": { "source": "local", "path": "./plugins/codebase-reading" },
+      "policy": { "installation": "AVAILABLE" },
+      "category": "Developer Tools"
+    },
+    {
+      "name": "mentor",
+      "source": { "source": "local", "path": "./plugins/mentor" },
+      "policy": { "installation": "AVAILABLE" },
+      "category": "Developer Tools"
+    }
+  ]
+}

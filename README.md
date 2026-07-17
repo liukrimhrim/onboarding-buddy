@@ -5,7 +5,7 @@ through a tutored curriculum. The skills are plain markdown + a stdlib
 Python validator and work with any coding agent; [Claude Code](https://code.claude.com)
 (recommended) gets one-command install via this repo's plugin marketplace,
 other agents copy the skill folders (see the
-[tutorial](TUTORIAL.md#2d-any-other-agent--these-skills-are-just-markdown)).
+[tutorial](TUTORIAL.md#2e-any-other-agent--these-skills-are-just-markdown)).
 
 **New here? Start with the [step-by-step tutorial](TUTORIAL.md)** — install,
 workflow, and best practices, written for beginners.
@@ -33,9 +33,12 @@ mentor@onboarding-buddy`. Update later with
   — everyone who opens the repo gets it, zero individual setup.
 - **Local marketplace** (offline / hacking on the skills):
   `claude plugin marketplace add /path/to/clone`.
+- **Codex**: native plugin path — `codex plugin marketplace add
+  liukrimhrim/onboarding-buddy`, then `/plugins` to install (this repo ships
+  Codex manifests alongside the Claude Code ones).
 - **Any other agent**: the skills are plain markdown + a stdlib script —
   copy the folder into your agent's skills/instructions mechanism
-  ([tutorial §2d](TUTORIAL.md#2d-any-other-agent--these-skills-are-just-markdown)).
+  ([tutorial §2e](TUTORIAL.md#2e-any-other-agent--these-skills-are-just-markdown)).
 
 Details for each: [tutorial §2](TUTORIAL.md#2-install).
 
