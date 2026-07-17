@@ -85,7 +85,7 @@ Aim for 3–7 lessons per curriculum. Fewer feels underbaked; more feels like a 
 
 When the user is ready ("start lesson 1" or "continue"), open the curriculum file, find the current lesson, and run it. A lesson is structured as:
 
-**(a) Set the goal.** One sentence: "By the end of this lesson you'll be able to ___." This is what you'll verify at the end.
+**(a) Set the goal AND the mastery points.** Open with one sentence — "By the end of this lesson you'll be able to ___" — and then an explicit short list (3–5 bullets) of the specific concepts, points, or pieces of knowledge the learner should walk away owning. Don't leave the objectives implicit or bury them as "you'll understand X"; name them concretely ("what `project_id` filtering buys", "why crud is deliberately dumb", "the two gates and which mistake each catches"). This list is load-bearing twice over: it tells the learner what to pay attention to, and it **is the spec for the end-of-lesson quiz** — every mastery point gets a question in step (e). If a point isn't worth quizzing, it wasn't worth listing.
 
 **(b) Ground in this repo.** Pick 1–3 specific files or symbols. Use [path/to/file.py:42](path/to/file.py:42)-style links so the user can click through. Make them concrete enough to read. If the topic doesn't have a natural anchor in this repo (e.g., a purely conceptual lesson on consensus), say so explicitly and skip to (c) — don't fabricate a connection.
 
@@ -99,13 +99,14 @@ A conceptual diagram and a filesystem-tree diagram serve different purposes and 
 
 **(d) Compare (optional).** What alternatives exist? Why did the team here pick this one? When would you pick differently? This is where the user gets the *judgment* layer, not just the facts.
 
-**(e) Comprehension check.** End the lesson with something active. Options that work:
+**(e) Quiz — one question per mastery point, to consolidate memory.** End every lesson with a short curated quiz that maps 1:1 to the mastery points from step (a): each point the learner was supposed to master gets a question that makes them *retrieve and apply* it from memory. This isn't optional garnish — **retrieval practice is what moves the concept from "followed along" to "retained" (the testing effect); re-reading feels like learning but doesn't stick, active recall does.** Question styles that work:
 - "Open `<file>` and predict what happens in `<function>` before reading it. Then check yourself."
 - "Sketch a diagram of how a request flows from A to B."
 - "Here's a hypothetical failure mode — how would you debug it given what we covered?"
-- "Find one place in the repo where this pattern is *not* followed and tell me why."
+- "Find one place in the repo where this concept is *not* followed and tell me why."
+- "In your own words: why does <abstraction> exist — what breaks without it?" (the subtraction test, back at the learner)
 
-Avoid trivia quizzes ("what's the name of the function that does X?"). The goal is to confirm understanding, not memory.
+Make the learner actually answer, then confirm or correct — a quiz they read past does nothing. Avoid trivia ("what's the name of the function that does X?"): the target is recalling and applying the *concepts*, not memorizing identifiers. If the learner whiffs a question, that mastery point is the first thing to revisit next session — note it in the scratchpad.
 
 **Close with forward pointers when there's an obvious next thread.** Briefly name what was deliberately *not* covered in this lesson and where it lives in the curriculum (e.g., "we didn't dig into event history — that's lesson 2; NDEs and `workflow.patched()` are lesson 3"). This is reassuring — the user can stop pulling threads they thought were getting dropped, because they can see where each one goes.
 
