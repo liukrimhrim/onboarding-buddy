@@ -28,6 +28,12 @@ Why this order: starting from real code anchors the abstraction to something the
 
 A lesson that skips step 1 fails the "repo-specific" axis. A lesson that skips step 2 leaves the user with trivia about this codebase but no transferable understanding. Step 3 is optional but high-value — it's how you convey *why* the team made the choices they did.
 
+**In step 2, when you name any general, load-bearing concept, extend it horizontally — don't just drop the term. This is NOT limited to design patterns.** It applies to *every* transferable idea that isn't specific to this repo: a design pattern ("repository pattern"), a technique ("idempotency", "backpressure"), a protocol ("OIDC", "gRPC"), an architectural primitive ("durable execution", "event sourcing", "vector search"), or any term of art. Naming it is not understanding it. Spend 2–4 sentences on the concept *itself*: the problem it was invented to solve, its canonical shape, where it comes from (e.g. DDD / Fowler's *PoEAA* for the repository pattern), and the vocabulary the user can now carry to other codebases. The goal is that the user walks away able to *recognize the concept elsewhere*, not just to recite that this repo uses it. A named concept with no background is a closed door; the horizontal extension is what opens it.
+
+**Frame step 3 as "convention vs. innovation," explicitly.** The comparison isn't just a menu of alternatives — its job is to tell the user *which parts of this repo are standard industry practice and which are the team's own choices*. Call it out in those words: "here they follow the textbook," "here they diverge, and the reason is ___." That mapping is what lets the user tell load-bearing local invention from boilerplate they can pattern-match from elsewhere — and it's where the team's real design judgment lives.
+
+**Justify the complexity — answer "why does this exist at all?" for every abstraction.** A skeptical learner reading new code asks three questions of every layer, indirection, and pattern: *why do we need this? why is it this complex? what value does it add?* Answer them head-on, and the sharpest tool is the **subtraction test**: show what the code would look like *without* the abstraction (the naive one-liner), then name the concrete pain that naive version hits — the scale limit, the race, the duplicated logic, the outage, the tenant leak — that forces the complexity. "This layer earns its keep because without it, X breaks" beats any amount of describing what the layer does. Two honesty rules: (1) if you *can't* name a concrete pain the abstraction prevents, say so — some complexity is genuinely unearned (cargo-culted, speculative, or historical), and a good tutor names over-engineering rather than rationalizing it as wisdom; (2) always name the *cost* too — every abstraction trades simplicity now for flexibility/safety later, and the learner should see both sides of the trade, not just the upside.
+
 ## Workflow
 
 ### 1. Intake — figure out what they actually want
@@ -64,6 +70,17 @@ Use this structure (it's a checklist, not a straitjacket — adapt the headings 
 - [ ] 3. <Title> — <one-line goal>
 ...
 
+## Lesson N record
+<!-- One record section per COMPLETED lesson — appended at lesson close, BEFORE checking the
+     lesson off. A validator hook rejects any curriculum save where a lesson is checked [x]
+     without a well-formed record (see step f). All four fields required, exact bold labels: -->
+**Mastery:** <the 3–5 points from step (a), semicolon-separated>
+**Confusables:** <pair(s) disambiguated + the discriminating tell — or "none">
+**Currency:** <current | legacy-live | mixed — what was flagged as sunsetting, or "nothing-flagged">
+**Quiz:**
+- Q: <question> → pass
+- Q: <question> → whiff (revisit: <mastery point>)
+
 <!-- Mentor scratchpad — not user-facing. Append briefly: what surprised them, what to revisit, calibration notes (e.g., "user wanted less jargon in lesson 2"). Keep terse; skip if there's nothing worth carrying forward. Don't datestamp entries — dates don't carry meaning the user cares about. -->
 ## Mentor scratchpad
 <short bullets, only if useful>
@@ -79,7 +96,7 @@ Aim for 3–7 lessons per curriculum. Fewer feels underbaked; more feels like a 
 
 When the user is ready ("start lesson 1" or "continue"), open the curriculum file, find the current lesson, and run it. A lesson is structured as:
 
-**(a) Set the goal.** One sentence: "By the end of this lesson you'll be able to ___." This is what you'll verify at the end.
+**(a) Set the goal AND the mastery points.** Open with one sentence — "By the end of this lesson you'll be able to ___" — and then an explicit short list (3–5 bullets) of the specific concepts, points, or pieces of knowledge the learner should walk away owning. Don't leave the objectives implicit or bury them as "you'll understand X"; name them concretely ("what `project_id` filtering buys", "why crud is deliberately dumb", "the two gates and which mistake each catches"). This list is load-bearing twice over: it tells the learner what to pay attention to, and it **is the spec for the end-of-lesson quiz** — every mastery point gets a question in step (e). If a point isn't worth quizzing, it wasn't worth listing.
 
 **(b) Ground in this repo.** Pick 1–3 specific files or symbols. Use [path/to/file.py:42](path/to/file.py:42)-style links so the user can click through. Make them concrete enough to read. If the topic doesn't have a natural anchor in this repo (e.g., a purely conceptual lesson on consensus), say so explicitly and skip to (c) — don't fabricate a connection.
 
@@ -93,17 +110,23 @@ A conceptual diagram and a filesystem-tree diagram serve different purposes and 
 
 **(d) Compare (optional).** What alternatives exist? Why did the team here pick this one? When would you pick differently? This is where the user gets the *judgment* layer, not just the facts.
 
-**(e) Comprehension check.** End the lesson with something active. Options that work:
+**Flag the confusables — spend extra time where the concept is easy to get wrong.** Some points are error-prone: easily-conflated pairs (authentication vs authorization, durable execution vs a scheduler, concurrency vs parallelism, `project_id` filtering vs project *authorization*), or spots where the intuitive reading is the wrong one. Don't glide past these at the same pace as everything else — stop and disambiguate explicitly: name the common mistake out loud ("the natural assumption is X; it's actually Y, and here's why"), contrast the two side by side, and give the discriminating tell. Anticipating the misconception and killing it beats hoping the learner didn't form it. Then **make sure it's on the quiz** — a confusable that isn't tested is a confusable you're trusting the learner to have gotten right by luck.
+
+**Weight by currency — flag what's being phased out, and never collapse "old" into "skippable."** The repo is always moving; some code is deprecated or sunsetting, and the codebase usually says so out loud: `deprecated_*` directories, `pending_drop(...)` markers on model columns, `deprecated=True` on routes, `v1` paths superseded by a `v2`, cold churn on a module a newer sibling replaced. Don't teach a dying subsystem at the same weight as the live one, and *always tell the learner the currency status* of whatever they're reading — "this is the current path" / "this is legacy, being replaced by X — know it exists, don't invest deeply" — so they don't sink hours into something on the way out. **The trap to avoid: "deprecated" ≠ "ignorable."** Currency (current vs deprecated) and liveness (still-load-bearing vs dead) are *independent* axes. Legacy-but-still-serving-traffic — e.g. this repo's `extract` v1, which is deprecated-direction yet the single most-referenced file and still in production — must be understood; the learner just needs to know it's sunsetting. Only the genuinely dead gets skipped-with-a-label. Collapsing "old" into "skip it" buries live legacy the learner *will* hit in real work. And because currency changes fast, re-check it each session rather than trusting a stale read or a hardcoded lesson plan.
+
+**(e) Quiz — one question per mastery point, to consolidate memory.** End every lesson with a short curated quiz that maps 1:1 to the mastery points from step (a): each point the learner was supposed to master gets a question that makes them *retrieve and apply* it from memory. This isn't optional garnish — **retrieval practice is what moves the concept from "followed along" to "retained" (the testing effect); re-reading feels like learning but doesn't stick, active recall does.** Question styles that work:
 - "Open `<file>` and predict what happens in `<function>` before reading it. Then check yourself."
 - "Sketch a diagram of how a request flows from A to B."
 - "Here's a hypothetical failure mode — how would you debug it given what we covered?"
-- "Find one place in the repo where this pattern is *not* followed and tell me why."
+- "Find one place in the repo where this concept is *not* followed and tell me why."
+- "In your own words: why does <abstraction> exist — what breaks without it?" (the subtraction test, back at the learner)
+- **Minimal-pair / discriminator questions on the confusables from step (d):** put the two easily-confused things next to each other and make the learner pick and justify ("is this authn or authz — and how do you know?", "would a plain scheduler survive this crash? why not?"). These are the highest-value questions — they catch a misconception the learner doesn't know they hold.
 
-Avoid trivia quizzes ("what's the name of the function that does X?"). The goal is to confirm understanding, not memory.
+Make the learner actually answer, then confirm or correct — a quiz they read past does nothing. Avoid trivia ("what's the name of the function that does X?"): the target is recalling and applying the *concepts*, not memorizing identifiers. If the learner whiffs a question, that mastery point is the first thing to revisit next session — note it in the scratchpad.
 
 **Close with forward pointers when there's an obvious next thread.** Briefly name what was deliberately *not* covered in this lesson and where it lives in the curriculum (e.g., "we didn't dig into event history — that's lesson 2; NDEs and `workflow.patched()` are lesson 3"). This is reassuring — the user can stop pulling threads they thought were getting dropped, because they can see where each one goes.
 
-**(f) Update the curriculum file.** Check the lesson off, advance the current-lesson pointer. If anything from the session is worth carrying forward (a calibration note like "user wanted less jargon," a side-question they asked to revisit), append a terse bullet to the mentor scratchpad. Otherwise leave it empty — don't journal every session by default. The user finds dated session logs noisy.
+**(f) Close out — write the lesson record, then check off. This step is machine-enforced.** Before marking the lesson `[x]`, append a `## Lesson N record` section to the curriculum file (format in the template above) with all four fields: **Mastery** (the step-a points), **Confusables** (what was disambiguated, or "none"), **Currency** (what was flagged as sunsetting, or "nothing-flagged"), and **Quiz** (every question with `→ pass` or `→ whiff (revisit: <point>)`). A PostToolUse hook runs `mentor_curriculum_gate.py` on every save of a `mentor-curricula/*.md` file and **rejects the write** if any checked-off lesson lacks a well-formed record — so a lesson cannot be closed without its quiz having actually happened. The record doubles as the self-check: filling in Confusables/Currency/Quiz *is* the audit that steps (d)–(e) were done. (Pre-gate lessons may carry `**Record waived:** <reason>` instead.) Then advance the current-lesson pointer, and add a scratchpad bullet only if something is worth carrying forward — whiffed quiz points always are.
 
 ### 4. Resume — pick up where they left off
 
